@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Guess the Number</title>
+    <!--Google Font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h3>I am thinking of a number between 1-100.</h3>
+      <h3>Can you guess it?</h3>
+
+      <input type="text" placeholder="Num" id="guess" /><br />
+      <button onclick="play()" id="my_btn">GUESS</button>
+      <div class="fireworks-container" id="fireworks-container">
+        <div class="fireworks"></div>
+      </div>
+      <p id="message1">No. Of Guesses: 0</p>
+      <p id="message2">Guessed Numbers are: None</p>
+      <p id="message3"></p>
+    </div>
+    <!--Script-->
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+    <script src="https://unpkg.com/fireworks-js@2.x/dist/index.umd.js"></script>
+  </body>
+</html>
