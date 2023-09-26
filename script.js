@@ -6,14 +6,21 @@ var answer = Math.floor(Math.random() * 100) + 1;
 var no_of_guesses = 0;
 var guessed_nums = [];
 
+function handleKeyPress(event) {
+  if (event.key === "Enter") {
+    play();
+  }
+}
+
 function play() {
   var user_guess = document.getElementById("guess").value;
   if (user_guess < 1 || user_guess > 100) {
     alert("Please enter a number between 1 and 100.");
+    document.getElementById("guess").value = "";
   } else {
     guessed_nums.push(user_guess);
     no_of_guesses += 1;
-
+    document.getElementById("guess").value = "";
     if (user_guess < answer) {
       msg1.textContent = "Your guess is too low.";
       msg2.textContent = "No. of guesses: " + (10 - no_of_guesses);
@@ -28,15 +35,18 @@ function play() {
       msg3.textContent = "You guessed it in " + no_of_guesses + " guesses";
       document.getElementById("my_btn").disabled = true;
       const fireworksContainer = document.getElementById("fireworks-container");
-      document.getElementById("guess").value = "";
       fireworksContainer.style.display = "block";
       const container = document.querySelector(".fireworks");
       const fireworks = new Fireworks.default(container);
       fireworks.start();
       setTimeout(function () {
-        fireworks.stop();
-        fireworksContainer.style.display = "none";
-        content.style.display = "block";
+        setTimeout(function () {
+          fireworks.stop();
+          fireworksContainer.style.display = "none";
+          content.style.display = "block";
+          location.reload();
+        }, 5000);
+        location.reload();
       }, 5000);
     }
   }
