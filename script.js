@@ -20,10 +20,19 @@ function play() {
   } else if (guessed_nums.length > 9) {
     Swal.fire({
       icon: "error",
-      title: "Oops...",
+      title: "Oops... You're Failed!",
       text: "You have reached the maximum number of guesses (10).",
-    }).then(function () {
-      location.reload();
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Try Again",
+      cancelButtonText: "Quit",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        location.reload();
+      } else {
+        window.close();
+      }
     });
     document.getElementById("guess").value = "";
   } else {
@@ -49,13 +58,24 @@ function play() {
       const fireworks = new Fireworks.default(container);
       fireworks.start();
       setTimeout(function () {
-        setTimeout(function () {
-          fireworks.stop();
-          fireworksContainer.style.display = "none";
-          content.style.display = "block";
-        }, 5000);
-        location.reload();
-      }, 5000);
+        Swal.fire({
+          title: "Congratulations!",
+          text: "You guessed the correct number!",
+          icon: "success",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Play Again",
+          cancelButtonText: "Quit",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            fireworks.stop();
+            location.reload();
+          } else {
+            window.close();
+          }
+        });
+      }, 3000);
     }
   }
 }
