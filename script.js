@@ -17,17 +17,26 @@ function play() {
   if (user_guess < 1 || user_guess > 100) {
     alert("Please enter a number between 1 and 100.");
     document.getElementById("guess").value = "";
+  } else if (guessed_nums.length > 9) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "You have reached the maximum number of guesses (10).",
+    }).then(function () {
+      location.reload();
+    });
+    document.getElementById("guess").value = "";
   } else {
     guessed_nums.push(user_guess);
     no_of_guesses += 1;
     document.getElementById("guess").value = "";
     if (user_guess < answer) {
       msg1.textContent = "Your guess is too low.";
-      msg2.textContent = "No. of guesses: " + (10 - no_of_guesses);
+      msg2.textContent = "No. Of Guesses are Left: " + (10 - no_of_guesses);
       msg3.textContent = "Guessed numbers are: " + guessed_nums;
     } else if (user_guess > answer) {
       msg1.textContent = "Your guess is too high.";
-      msg2.textContent = "No. of guesses: " + (10 - no_of_guesses);
+      msg2.textContent = "No. Of Guesses are Left: " + (10 - no_of_guesses);
       msg3.textContent = "Guessed numbers are: " + guessed_nums;
     } else if (user_guess == answer) {
       msg1.textContent = "Yippie You Win!!";
@@ -44,7 +53,6 @@ function play() {
           fireworks.stop();
           fireworksContainer.style.display = "none";
           content.style.display = "block";
-          location.reload();
         }, 5000);
         location.reload();
       }, 5000);
