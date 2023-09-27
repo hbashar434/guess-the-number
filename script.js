@@ -16,25 +16,6 @@ function play() {
   var user_guess = document.getElementById("guess").value;
   if (user_guess < 1 || user_guess > 100) {
     alert("Please enter a number between 1 and 100.");
-    document.getElementById("guess").value = "";
-  } else if (guessed_nums.length > 9) {
-    Swal.fire({
-      icon: "error",
-      title: "Oops... You're Failed!",
-      text: "You have reached the maximum number of guesses (10).",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Try Again",
-      cancelButtonText: "Quit",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        location.reload();
-      } else {
-        window.close();
-      }
-    });
-    document.getElementById("guess").value = "";
   } else {
     guessed_nums.push(user_guess);
     no_of_guesses += 1;
@@ -75,7 +56,26 @@ function play() {
             window.close();
           }
         });
-      }, 3000);
+      }, 4000);
+      return;
+    }
+    if (guessed_nums.length == 10) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops... You're Failed!",
+        text: "You have reached the maximum number of guesses (10).",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Try Again",
+        cancelButtonText: "Quit",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          location.reload();
+        } else {
+          window.close();
+        }
+      });
     }
   }
 }
